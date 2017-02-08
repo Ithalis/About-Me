@@ -1,0 +1,12 @@
+*{
+  background-color: gray;
+}
+
+h1{
+  border-bottom: 2px solid black;
+}
+
+#bio{
+  width: 500px;
+  color: white;
+}

@@ -46,7 +46,7 @@ var incorrectAnswerResponses = [incorrectOne, incorrectTwo, incorrectThree, inco
 var answers = ['Y', 'Y', 'N', 'N', 'Y']; //To check their answers against.
 var userAnswers = []; //to .push their answers into.
 var userNumberGuesses = []; //to .push their number and country geusses until correct or end.
-var countries = ['Ireland', 'Mexico', 'Canada'];
+var countries = ['IRELAND', 'MEXICO', 'CANADA'];
 var userCountryGuesses = [];
 var score = 0;
 
@@ -84,12 +84,12 @@ for(var guesses = 0; guesses < 4; guesses++){
   }
 }
 
-for(var countryGuesses = 0; countryGuesses < 6; countryGuesses++){
-  var userCountryGuess = prompt(questions[6]);
+for(var secondQuizGuesses = 0; secondQuizGuesses < 6; secondQuizGuesses++){
+  var userCountryGuesses = prompt(questions[6]);
   userCountryGuesses.push(userCountryGuess);
-  if(userCountryGuesses[countryGuesses] === countries[0] || countries[1] || countries[2]){
+  if(userCountryGuesses[secondQuizGuesses].toUpperCase() === countries[0] || countries[1] || countries[2]){
     console.log(correctAnswerResponses[6]);
-    userAnswers.push(userCountryGuesses[countryGuesses]);
+    userAnswers.push(userCountryGuesses[secondQuizGuesses]);
     score++;
     break;
   } else {
@@ -98,7 +98,14 @@ for(var countryGuesses = 0; countryGuesses < 6; countryGuesses++){
 }
 console.log('I\'ve been to Ireland, Mexico, and Canada!');
 
+//Congratulate the user and give them their score.
 console.log('Congratulations! You\'re score is: ' + score + '.');
+if(score < 3){
+  console.log('Wow, you don\'t know me at all!');
+} else {
+  console.log('Wow, you know me pretty well!');
+}
+
 // if(userAnswers[i].toUpperCase === answers[i]){
 //   console.log(correctAnswerResponses[i]);
 //   userCorrectAnswers.push(userAnswers[i]);

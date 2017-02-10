@@ -10,39 +10,134 @@ if(confirmQuiz === true) {
   console.log('Too bad, starting anyway.');
 }
 
-alert('Please use Y or N to answer all questions.');
-//Here is where the questions begin.
-var questionOne = prompt('Am I from Georgia?');
-if(questionOne.toUpperCase() === 'Y'){
-  console.log('Yes! I love sweet tea, therefore I am from Georgia.');
-} else {
-  console.log('Nope! Fayetteville, Ga is my hometown.');
+//Setting up all of the variables.
+var ranNumber = Math.floor (Math.random() * 50) + 1; //For number guessing game later.
+
+var questionOne = 'Am I from Georgia?';
+var questionTwo = 'Do I like sushi?';
+var questionThree = 'Was I in the Army?';
+var questionFour = 'Do I have a degree?';
+var questionFive = 'Am I awesome?';
+var questionSix = 'How old am I? Between 0-50.';
+var questionSeven = 'Can you guess a country I\'ve visited outside the US?';
+
+var correctOne = 'Yes! I love sweet tea, therefore I\'m from Georgia.';
+var correctTwo = 'Duh, sushi is delicious. Glad you think so too.';
+var correctThree = 'Correct! I was actually in the Navy.';
+var correctFour = 'You\'e right. I\'m a lazy person at my core.';
+var correctFive = 'Yep, I\'m so awesome.';
+var correctSix = 'You\'re right! I am totally that age and didn\'t use a random number!';
+var correctSeven = 'I\'ve visited Ireland... nowhere else, though. I\'m not very travelled yet.';
+
+var incorrectOne = 'Nope! Fayetteville, Ga is my hometown.';
+var incorrectTwo = 'WRONG! Sushi is best food.';
+var incorrectThree = 'No, I was in the Navy as a Nuclear Machinist\'s mate. Not to toot my own horn.';
+var incorrectFour = 'You\'re expectations are way too high. I am lazy.';
+var incorrectFive = 'Um, rude. I am awesome.';
+var incorrectSixLow = 'Nope! Try a bigger number!';
+var incorrectSixHigh = 'Nope! Try a lower number!';
+var incorrectSix = 'You\'ve run out of guesses. I\'m ' + ranNumber + '. Yeah, totally that age.';
+var incorrectSevenRetry = 'Never been there, try a different place.';
+var incorrectSeven = 'You\'ve run out of guesses. I\'ve been to Ireland.';
+
+//Now we set up the arrays with all of the variables.
+var questions = [questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven];
+var correctAnswerResponses = [correctOne, correctTwo, correctThree, correctFour, correctFive, correctSix, correctSeven];
+var incorrectAnswerResponses = [incorrectOne, incorrectTwo, incorrectThree, incorrectFour, incorrectFive, incorrectSix, incorrectSixLow, incorrectSixHigh, incorrectSeven, incorrectSevenRetry];
+var answers = ['Y', 'Y', 'N', 'N', 'Y', 23, 'Ireland']; //To check their answers against.
+var userAnswers = []; //to .push their answers into.
+var userGuesses = []; //to .push their number and country geusses until correct or end.
+var countries = [];
+var score = 0;
+
+//Now the game begins. Using a for loop to access the questions array then returning a response from either the correct or incorrect answer response arrays using an if/else statement. Push user's answer to the userCorrectAnswers array if, well, correct.
+for (var i = 0; i < 5; i++) {
+  userAnswers.push(prompt(questions[i]));
+  if(userAnswers[i].toUpperCase() === answers[i]){
+    console.log(correctAnswerResponses[i]);
+    score++;
+  } else {
+    console.log(incorrectAnswerResponses[i]);
+  }
 }
 
-var questionTwo = prompt('Do I like sushi?');
-if(questionTwo.toUpperCase() === 'Y'){
-  console.log('Duh, sushi is stupid good.');
-} else {
-  console.log('WRONG! Sushi is best food.');
+for(var guesses = 0; guesses < 4; guesses++){
+  var guess = prompt('How old am I?');
+  var guess = parseInt(guess, 10);
+  userGuesses.push(guess);
+  if(userGuesses[guesses] === ranNumber){
+    console.log(correctAnswerResponses[5]);
+    userAnswers.push(userGuesses[guesses]);
+    break;
+  } else if(userGuesses[guesses] > ranNumber){
+    console.log(incorrectSixHigh);
+  } else if(userGuesses[guesses] < ranNumber){
+    console.log(incorrectSixLow);
+  } else {
+    console.log('I don\'t recognize that answer.');
+    userGuesses.splice(-1, 1); // Need to remove last guess, or else it will get stuck in the loop.
+    guesses--; //Need to lower the number, or the game can end with non-number guesses.
+  }
+  if(guesses === 3){
+    console.log(incorrectSix);
+  }
 }
-
-var questionThree = prompt('Was I in the Army?');
-if(questionThree.toUpperCase() === 'N'){
-  console.log('Correct! I was actually in the Navy.');
-} else {
-  console.log('No, I was in the Navy as a Nuclear Machinist\'s mate. Not to toot my own horn.');
-}
-
-var questionFour = prompt('Do I have a degree?');
-if(questionFour.toUpperCase() === 'N'){
-  console.log('You\'e right. I\'m a lazy person at my core.');
-} else {
-  console.log('You\'re expectations are way too high. I am lazy.');
-}
-
-var questionFive = prompt('Am I awesome?');
-if(questionFive.toUpperCase() === 'Y'){
-  console.log('Yep! I am basically the most awesome person to be on earth.');
-} else {
-  console.log('Um, rude. I am awesome.');
-}
+//
+// var countryGuessedCorrectlyFlag = false;
+// for(countryGuesses = 0; countryGuesses < 6; countryGuesses++){
+//   if
+// }
+//
+// if(userAnswers[i].toUpperCase === answers[i]){
+//   console.log(correctAnswerResponses[i]);
+//   userCorrectAnswers.push(userAnswers[i]);
+// } else {
+//   console.log(incorrectAnswerResponses[i]);
+// }
+//
+// if(userAnswers[1].toUpperCase === 'Y'){
+//   console.log(correctAnswerResponses[1]);
+//   userCorrectAnswers.push(userAnswers[1]);
+// } else {
+//   console.log(incorrectAnswerResponses[1]);
+// }
+//
+// if(userAnswers[2].toUpperCase === 'Y'){
+//   console.log(correctAnswerResponses[2]);
+//   userCorrectAnswers.push(userAnswers[2]);
+// } else {
+//   console.log(incorrectAnswerResponses[2]);
+// }
+//
+// if(userAnswers[3].toUpperCase === 'Y'){
+//   console.log(correctAnswerResponses[3]);
+//   userCorrectAnswers.push(userAnswers[3]);
+// } else {
+//   console.log(incorrectAnswerResponses[3]);
+// }
+//
+// if(userAnswers[4] === 'Y'){
+//   console.log(correctAnswerResponses[4]);
+//   userCorrectAnswers.push(userAnswers[4]);
+// } else {
+//   console.log(incorrectAnswerResponses[4]);
+// }
+//
+// for(var guesses = 0; guesses < 5; guesses++){
+//   if(userAnswers[5 + guesses] === '23'){
+//     console.log(correctAnswerResponses[5]);
+//     userCorrectAnswers.push(userAnswers[5 + guesses]);
+//     break;
+//   } else if(userAnswers[5 + guesses] >= '23'){
+//     console.log();
+//   }
+// }
+// for(var countries = 0; countries < 7; countries++){
+//   if(userAnswers[6 + guesses + countries] === 'IRELAND'){
+//     console.log(correctAnswerResponses[6]);
+//     userCorrectAnswers.push(userAnswers[6 + guesses + countries]);
+//     break;
+//   } else {
+//     console.log(incorrectAnswerResponses[6]);
+//   }
+// }

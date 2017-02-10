@@ -27,7 +27,7 @@ var correctThree = 'Correct! I was actually in the Navy.';
 var correctFour = 'You\'e right. I\'m a lazy person at my core.';
 var correctFive = 'Yep, I\'m so awesome.';
 var correctSix = 'You\'re right! I am totally that age and didn\'t use a random number!';
-var correctSeven = 'I\'ve visited Ireland... nowhere else, though. I\'m not very travelled yet.';
+var correctSeven = 'Correct!';
 
 var incorrectOne = 'Nope! Fayetteville, Ga is my hometown.';
 var incorrectTwo = 'WRONG! Sushi is best food.';
@@ -37,17 +37,17 @@ var incorrectFive = 'Um, rude. I am awesome.';
 var incorrectSixLow = 'Nope! Try a bigger number!';
 var incorrectSixHigh = 'Nope! Try a lower number!';
 var incorrectSix = 'You\'ve run out of guesses. I\'m ' + ranNumber + '. Yeah, totally that age.';
-var incorrectSevenRetry = 'Never been there, try a different place.';
-var incorrectSeven = 'You\'ve run out of guesses. I\'ve been to Ireland.';
+var incorrectSeven = 'Incorrect!';
 
 //Now we set up the arrays with all of the variables.
 var questions = [questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven];
 var correctAnswerResponses = [correctOne, correctTwo, correctThree, correctFour, correctFive, correctSix, correctSeven];
-var incorrectAnswerResponses = [incorrectOne, incorrectTwo, incorrectThree, incorrectFour, incorrectFive, incorrectSix, incorrectSixLow, incorrectSixHigh, incorrectSeven, incorrectSevenRetry];
-var answers = ['Y', 'Y', 'N', 'N', 'Y', 23, 'Ireland']; //To check their answers against.
+var incorrectAnswerResponses = [incorrectOne, incorrectTwo, incorrectThree, incorrectFour, incorrectFive, incorrectSix, incorrectSixLow, incorrectSixHigh, incorrectSeven];
+var answers = ['Y', 'Y', 'N', 'N', 'Y']; //To check their answers against.
 var userAnswers = []; //to .push their answers into.
-var userGuesses = []; //to .push their number and country geusses until correct or end.
-var countries = [];
+var userNumberGuesses = []; //to .push their number and country geusses until correct or end.
+var countries = ['Ireland', 'Mexico', 'Canada'];
+var userCountryGuesses = [];
 var score = 0;
 
 //Now the game begins. Using a for loop to access the questions array then returning a response from either the correct or incorrect answer response arrays using an if/else statement. Push user's answer to the userCorrectAnswers array if, well, correct.
@@ -64,30 +64,41 @@ for (var i = 0; i < 5; i++) {
 for(var guesses = 0; guesses < 4; guesses++){
   var guess = prompt('How old am I?');
   var guess = parseInt(guess, 10);
-  userGuesses.push(guess);
-  if(userGuesses[guesses] === ranNumber){
+  userNumberGuesses.push(guess);
+  if(userNumberGuesses[guesses] === ranNumber){
     console.log(correctAnswerResponses[5]);
-    userAnswers.push(userGuesses[guesses]);
+    userAnswers.push(userNumberGuesses[guesses]);
+    score++;
     break;
-  } else if(userGuesses[guesses] > ranNumber){
+  } else if(userNumberGuesses[guesses] > ranNumber){
     console.log(incorrectSixHigh);
-  } else if(userGuesses[guesses] < ranNumber){
+  } else if(userNumberGuesses[guesses] < ranNumber){
     console.log(incorrectSixLow);
   } else {
     console.log('I don\'t recognize that answer.');
-    userGuesses.splice(-1, 1); // Need to remove last guess, or else it will get stuck in the loop.
+    userNumberGuesses.splice(-1, 1); // Need to remove last guess, or else it will get stuck in the loop.
     guesses--; //Need to lower the number, or the game can end with non-number guesses.
   }
   if(guesses === 3){
     console.log(incorrectSix);
   }
 }
-//
-// var countryGuessedCorrectlyFlag = false;
-// for(countryGuesses = 0; countryGuesses < 6; countryGuesses++){
-//   if
-// }
-//
+
+for(var countryGuesses = 0; countryGuesses < 6; countryGuesses++){
+  var userCountryGuess = prompt(questions[6]);
+  userCountryGuesses.push(userCountryGuess);
+  if(userCountryGuesses[countryGuesses] === countries[0] || countries[1] || countries[2]){
+    console.log(correctAnswerResponses[6]);
+    userAnswers.push(userCountryGuesses[countryGuesses]);
+    score++;
+    break;
+  } else {
+    console.log(incorrectSeven);
+  }
+}
+console.log('I\'ve been to Ireland, Mexico, and Canada!');
+
+console.log('Congratulations! You\'re score is: ' + score + '.');
 // if(userAnswers[i].toUpperCase === answers[i]){
 //   console.log(correctAnswerResponses[i]);
 //   userCorrectAnswers.push(userAnswers[i]);

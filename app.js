@@ -50,52 +50,69 @@ var countries = ['IRELAND', 'MEXICO', 'CANADA'];
 var userCountryGuesses = [];
 var score = 0;
 
+//--------------------
+
 //Now the game begins. Using a for loop to access the questions array then returning a response from either the correct or incorrect answer response arrays using an if/else statement. Push user's answer to the userCorrectAnswers array if, well, correct.
-for (var i = 0; i < 5; i++) {
-  userAnswers.push(prompt(questions[i]));
-  if(userAnswers[i].toUpperCase() === answers[i]){
-    console.log(correctAnswerResponses[i]);
-    score++;
-  } else {
-    console.log(incorrectAnswerResponses[i]);
+function questionOneToFive(){
+  for (var i = 0; i < 5; i++) {
+    userAnswers.push(prompt(questions[i]));
+    if(userAnswers[i].toUpperCase() === answers[i]){
+      console.log(correctAnswerResponses[i]);
+      score++;
+    } else {
+      console.log(incorrectAnswerResponses[i]);
+    }
   }
 }
+questionOneToFive();
+//-------------------------------
 
-for(var guesses = 0; guesses < 4; guesses++){
-  var guess = prompt('How old am I?');
-  var guess = parseInt(guess, 10);
-  userNumberGuesses.push(guess);
-  if(userNumberGuesses[guesses] === ranNumber){
-    console.log(correctAnswerResponses[5]);
-    userAnswers.push(userNumberGuesses[guesses]);
-    score++;
-    break;
-  } else if(userNumberGuesses[guesses] > ranNumber){
-    console.log(incorrectSixHigh);
-  } else if(userNumberGuesses[guesses] < ranNumber){
-    console.log(incorrectSixLow);
-  } else {
-    console.log('I don\'t recognize that answer.');
-    userNumberGuesses.splice(-1, 1); // Need to remove last guess, or else it will get stuck in the loop.
-    guesses--; //Need to lower the number, or the game can end with non-number guesses.
-  }
-  if(guesses === 3){
-    console.log(incorrectSix);
-  }
-}
+function questionSixAsk(){
 
-for(var secondQuizGuesses = 0; secondQuizGuesses < 6; secondQuizGuesses++){
-  var userCountryGuesses = prompt(questions[6]);
-  userCountryGuesses.push(userCountryGuess);
-  if(userCountryGuesses[secondQuizGuesses].toUpperCase() === countries[0] || countries[1] || countries[2]){
-    console.log(correctAnswerResponses[6]);
-    userAnswers.push(userCountryGuesses[secondQuizGuesses]);
-    score++;
-    break;
-  } else {
-    console.log(incorrectSeven);
+  for(var guesses = 0; guesses < 4; guesses++){
+    var guess = prompt('How old am I?');
+    var guess = parseInt(guess, 10);
+    userNumberGuesses.push(guess);
+    if(userNumberGuesses[guesses] === ranNumber){
+      console.log(correctAnswerResponses[5]);
+      userAnswers.push(userNumberGuesses[guesses]);
+      score++;
+      break;
+    } else if(userNumberGuesses[guesses] > ranNumber){
+      console.log(incorrectSixHigh);
+    } else if(userNumberGuesses[guesses] < ranNumber){
+      console.log(incorrectSixLow);
+    } else {
+      console.log('I don\'t recognize that answer.');
+      userNumberGuesses.splice(-1, 1); // Need to remove last guess, or else it will get stuck in the loop.
+      guesses--; //Need to lower the number, or the game can end with non-number guesses.
+    }
+    if(guesses === 3){
+      console.log(incorrectSix);
+    }
   }
 }
+questionSixAsk();
+//---------------------------------------
+
+function questionSevenAsk(){
+  //for loop to make 6 itterations
+  for(var secondQuizGuesses = 0; secondQuizGuesses < 6; secondQuizGuesses++){
+    //prompt for user input
+    var userCountryGuess = prompt(questions[6]);
+    //confusing...why push to an array???
+    if(userCountryGuess.toUpperCase() === countries[0] || userCountryGuess.toUpperCase() === countries[1] || userCountryGuess.toUpperCase() === countries[2]){
+      console.log(correctAnswerResponses[6]);
+      userAnswers.push(userCountryGuess);
+      score++;
+      break;
+    } else {
+      console.log(incorrectSeven);
+    }
+  }
+}
+questionSevenAsk();
+//------------------------------
 console.log('I\'ve been to Ireland, Mexico, and Canada!');
 
 //Congratulate the user and give them their score.
@@ -105,57 +122,3 @@ if(score < 3){
 } else {
   console.log('Wow, you know me pretty well!');
 }
-
-// if(userAnswers[i].toUpperCase === answers[i]){
-//   console.log(correctAnswerResponses[i]);
-//   userCorrectAnswers.push(userAnswers[i]);
-// } else {
-//   console.log(incorrectAnswerResponses[i]);
-// }
-//
-// if(userAnswers[1].toUpperCase === 'Y'){
-//   console.log(correctAnswerResponses[1]);
-//   userCorrectAnswers.push(userAnswers[1]);
-// } else {
-//   console.log(incorrectAnswerResponses[1]);
-// }
-//
-// if(userAnswers[2].toUpperCase === 'Y'){
-//   console.log(correctAnswerResponses[2]);
-//   userCorrectAnswers.push(userAnswers[2]);
-// } else {
-//   console.log(incorrectAnswerResponses[2]);
-// }
-//
-// if(userAnswers[3].toUpperCase === 'Y'){
-//   console.log(correctAnswerResponses[3]);
-//   userCorrectAnswers.push(userAnswers[3]);
-// } else {
-//   console.log(incorrectAnswerResponses[3]);
-// }
-//
-// if(userAnswers[4] === 'Y'){
-//   console.log(correctAnswerResponses[4]);
-//   userCorrectAnswers.push(userAnswers[4]);
-// } else {
-//   console.log(incorrectAnswerResponses[4]);
-// }
-//
-// for(var guesses = 0; guesses < 5; guesses++){
-//   if(userAnswers[5 + guesses] === '23'){
-//     console.log(correctAnswerResponses[5]);
-//     userCorrectAnswers.push(userAnswers[5 + guesses]);
-//     break;
-//   } else if(userAnswers[5 + guesses] >= '23'){
-//     console.log();
-//   }
-// }
-// for(var countries = 0; countries < 7; countries++){
-//   if(userAnswers[6 + guesses + countries] === 'IRELAND'){
-//     console.log(correctAnswerResponses[6]);
-//     userCorrectAnswers.push(userAnswers[6 + guesses + countries]);
-//     break;
-//   } else {
-//     console.log(incorrectAnswerResponses[6]);
-//   }
-// }
